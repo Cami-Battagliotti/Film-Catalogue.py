@@ -102,3 +102,29 @@ def show_menu():
     '4) Remove the complete catalogue 💀\n'
     '5) Exit👋\n'
     )
+
+
+def main():
+
+    '''
+    Función que lanza la aplicación para la gestión del catalogo de peliculas.
+    '''
+    print('\n**************************\n'
+          '\nWELCOME !!😊\n'
+          '🎬 We have a few film catalogues available for you 🎬')
+
+    while True:
+        
+        '''
+        Bucle que muestra el menu y solicita al usuario la seleccion de una opcion, ejecutando la aplicacion mientras que la opcion 5 (Exit) no sea ingresada.
+        '''
+        show_menu()
+
+        option = input('\nPlease select an option from the list (only number): ')
+
+        if option == '5':
+            print('\nSuccessful programme Exit ✅\n')
+            break
+
+
+main()
