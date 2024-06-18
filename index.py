@@ -147,5 +147,25 @@ def main():
                 else: 
                     print('\n❌ The file does not exist. Please try another one')
 
+            elif option == '2':
+                genre = input('\nPlease state the Genre: ').lower()
+                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                catalogue = FilmCatalogue(genre, path)
+            
+                catalogue.listFilms()
+
+            elif option == '3':
+                pass
+
+            elif option == '4':
+                genre = input('\nPlease state the Genre: ').lower()
+                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                
+                catalogue = FilmCatalogue(genre, path)
+                catalogue.removeCatalogue()
+
+            else:
+                print('\nERROR ❌ Please check the menu again and introduce a valid option:')
+
 
 main()
