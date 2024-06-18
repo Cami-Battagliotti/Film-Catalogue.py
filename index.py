@@ -24,32 +24,32 @@ class Film:
         return f'Film: {listData}'
     
 
-    class FilmCatalogue:
+class FilmCatalogue:
 
-        def __init__(self, catalogueName, filePath):
-            self.name = catalogueName
-            self.path = filePath
+    def __init__(self, catalogueName, filePath):
+        self.name = catalogueName
+        self.path = filePath
 
-        def addFilm(self, filmToAdd):
-            self.film = filmToAdd
+    def addFilm(self, filmToAdd):
+        self.film = filmToAdd
 
-            '''
-            Función que agrega el film ingresado por el usuario en un catalogo indicado.
-            Parámetros:
-                name: Es el nombre del catalogo (nombrado segun el genero).
-                film: Es un string con los datos del film a agregar.
-                path: Es la ruta al archivo.
-            Devuelve: Un mesaje informando si el film fue agregado o ha habido algún problema.
-            '''
+        '''
+        Función que agrega el film ingresado por el usuario en un catalogo indicado.
+        Parámetros:
+            name: Es el nombre del catalogo (nombrado segun el genero).
+            film: Es un string con los datos del film a agregar.
+            path: Es la ruta al archivo.
+        Devuelve: Un mesaje informando si el film fue agregado o ha habido algún problema.
+        '''
 
-            try:
-                f = open(self.path,'a')             
-            except FileNotFoundError:
-                print(f'\n❌ The catalogue "{self.name}" does not exist\n')
-            else:
-                f.write(f"\n{self.film}")
-                f.close()
-                print(f'\nThe {self.film} has been added✅')
+        try:
+            f = open(self.path,'a')             
+        except FileNotFoundError:
+            print(f'\n❌ The catalogue "{self.name}" does not exist\n')
+        else:
+            f.write(f"\n{self.film}")
+            f.close()
+            print(f'\nThe {self.film} has been added✅')
 
 
     def listFilms(self):
@@ -91,7 +91,7 @@ class Film:
 
     
 
-    #Bienvenida y muestra del menu de opciones
+#Bienvenida y muestra del menu de opciones
 def show_menu():
     print(
     '\n**************************'
@@ -125,6 +125,27 @@ def main():
         if option == '5':
             print('\nSuccessful programme Exit ✅\n')
             break
+
+        else: 
+            if option == '1':
+                '''
+                Solicita nombre del catalogo sobre el que desea trabajar, establece la ruta del mismo y, si existe, crea un objeto Film con los datos ingresados por el usuario que sera el que utilice el metodo "addFilm" para agregarlo a ese catalogo especifico. Devuelve un mensaje de error si el catalogo ingresado no existe.
+                '''
+                genre = input('\nPlease state the Genre: ').lower()
+                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+
+                if os.path.exists(path):
+                    
+                    newFilmName = input('Please indicate the Name of the film: ').lower()
+                    newFilmDirector = input('Please indicate the Director of the film: ').lower()
+                    newFilmYear = input('Please indicate the Year of release: ').lower()
+                    film = Film(newFilmName, newFilmDirector, newFilmYear)
+
+                    catalogue = FilmCatalogue(genre, path)
+                    catalogue.addFilm(film)
+
+                else: 
+                    print('\n❌ The file does not exist. Please try another one')
 
 
 main()
