@@ -24,6 +24,13 @@ class Film:
         return f'Film: {listData}'
     
 
+    class FilmCatalogue:
+
+        def __init__(self, catalogueName, filePath):
+            self.name = catalogueName
+            self.path = filePath
+    
+
     #Bienvenida y muestra del menu de opciones
 def show_menu():
     print(
