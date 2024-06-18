@@ -29,6 +29,66 @@ class Film:
         def __init__(self, catalogueName, filePath):
             self.name = catalogueName
             self.path = filePath
+
+        def addFilm(self, filmToAdd):
+            self.film = filmToAdd
+
+            '''
+            Función que agrega el film ingresado por el usuario en un catalogo indicado.
+            Parámetros:
+                name: Es el nombre del catalogo (nombrado segun el genero).
+                film: Es un string con los datos del film a agregar.
+                path: Es la ruta al archivo.
+            Devuelve: Un mesaje informando si el film fue agregado o ha habido algún problema.
+            '''
+
+            try:
+                f = open(self.path,'a')             
+            except FileNotFoundError:
+                print(f'\n❌ The catalogue "{self.name}" does not exist\n')
+            else:
+                f.write(f"\n{self.film}")
+                f.close()
+                print(f'\nThe {self.film} has been added✅')
+
+
+    def listFilms(self):
+
+        '''
+        Función que muestra los films presentes en un catalogo indicado.
+        Parámetros:
+            name: Es el nombre del catalogo (nombrado segun el genero).
+            path: Es la ruta al archivo.
+        Devuelve:
+            Un mesaje informando si el catalogo existe o no.
+        '''
+
+        try:
+            f = open(self.path,'r')
+        except FileNotFoundError:
+            print(f'\n❌ The catalogue "{self.name}" does not exist\n')
+        else:
+            print('\n')
+            print(f.read())
+            f.close()
+
+
+    def removeCatalogue(self):
+
+        '''
+        Función que elimina un catalogo indicado.
+        Parámetros:
+            name: Es el nombre del catalogo (nombrado segun el genero).
+            path: Es la ruta al archivo.
+        Devuelve: Un mesaje informando si el catalogo fue removido exitosamente o si hubo algun problema.
+        '''
+        
+        if os.path.exists(self.path):
+            os.remove(self.path)
+            print(f'\nThe catalogue "{self.name}" has been removed✅')
+        else: 
+            print('\n❌ The file does not exist.')
+
     
 
     #Bienvenida y muestra del menu de opciones
