@@ -89,7 +89,40 @@ class FilmCatalogue:
         else: 
             print('\n❌ The file does not exist.')
 
-    
+
+    def removeFilm(self, filmName):
+
+        '''
+        Función que elimina el film ingresado por el usuario en un catalogo indicado.
+        Parámetros:
+            name: Es el nombre del catalogo (nombrado segun el genero).
+            filmName: Es un string con el nombre del film a eliminar.
+            path: Es la ruta al archivo.
+        Devuelve: Un mesaje informando si el film fue eliminado o si ha habido algún problema.
+        '''
+        
+        try:
+            f = open(self.path, 'r')
+        except FileNotFoundError:
+             print('❌ The catalogue does not exist')
+        else:
+            allFilms = f.readlines()
+            f.close()
+
+            filmsList = []
+            for line in allFilms:           
+                if filmName not in line:
+                    filmsList.append(line)
+
+            with open(self.path, 'w') as f:
+                f.writelines(filmsList)
+
+            if filmName in line:
+                print(f'\nThe film "{filmName}" has been deleted from the catalogue {self.name}✅')
+            else:
+                print('\n❌ The entered film does not exist in our database.')
+
+
 
 #Bienvenida y muestra del menu de opciones
 def show_menu():
@@ -155,7 +188,12 @@ def main():
                 catalogue.listFilms()
 
             elif option == '3':
-                pass
+                genre = input('\nPlease state the Genre: ').lower()
+                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                catalogue = FilmCatalogue(genre, path)
+                titleToRemove = input('Please state the Title of the film you want to remove: ').lower()
+
+                catalogue.removeFilm(titleToRemove)
 
             elif option == '4':
                 genre = input('\nPlease state the Genre: ').lower()
