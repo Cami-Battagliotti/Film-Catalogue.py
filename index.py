@@ -134,7 +134,7 @@ class FilmCatalogue:
             print(f'\n❌ The catalogue "{self.name}" already exists.')
         else:
             with open(self.path, mode="w") as f:
-                f.write(f'Catalogue of {self.name} films: ')
+                f.write(f'Catalogue of {self.name} films:\n')
             print(f'\nA new catalogue of films "{self.name}" has been successfully created✅') 
 
 
@@ -160,13 +160,13 @@ def main():
     Función que lanza la aplicación para la gestión del catalogo de peliculas.
     '''
     print('\n**************************\n'
-          '\nWELCOME !!😊\n'
+          '\n😊 WELCOME !!😊\n'
           '🎬 We have a few film catalogues available for you 🎬')
 
     while True:
         
         '''
-        Bucle que muestra el menu y solicita al usuario la seleccion de una opcion, ejecutando la aplicacion mientras que la opcion 5 (Exit) no sea ingresada.
+        Bucle que muestra el menu y solicita al usuario la seleccion de una opcion, ejecutando la aplicacion mientras que la opcion 6 (Exit) no sea ingresada y devolviendo un mensaje de error si la opcion ingresada no esta en el menu.
         '''
         show_menu()
 
@@ -175,6 +175,9 @@ def main():
         if option == '6':
             print('\nSuccessful programme Exit ✅\n')
             break
+
+        elif option not in ['1','2','3','4','5']:
+            (print('\nERROR ❌ Please check the menu again and introduce a valid option:'))
 
         else: 
             genre = input('\nPlease state the Genre: ').capitalize()
@@ -211,8 +214,7 @@ def main():
             elif option == '5':
                 catalogue.createCatalogue()
 
-            else:
-                print('\nERROR ❌ Please check the menu again and introduce a valid option:')
+                
 
 
 main()
