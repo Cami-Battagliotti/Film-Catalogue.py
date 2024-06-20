@@ -173,11 +173,11 @@ def main():
         option = input('\nPlease select an option from the list (only number): ')
 
         if option == '6':
-            print('\nSuccessful programme Exit ✅\n')
+            print('\nSuccessful Exit from the programme ✅\n')
             break
 
         elif option not in ['1','2','3','4','5']:
-            (print('\nERROR ❌ Please check the menu again and introduce a valid option:'))
+            print('\nERROR ❌ Please check the menu again and introduce a valid option:')
 
         else: 
             genre = input('\nPlease state the Genre: ').capitalize()
