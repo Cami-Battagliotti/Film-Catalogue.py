@@ -122,6 +122,23 @@ class FilmCatalogue:
                 print('\n❌ The entered film does not exist in our database.')
 
 
+    def createCatalogue(self):
+        '''
+        Función que crea un catalogo vacío para guardar una lista de peliculas.
+        Parámetros: 
+            path: Es la ruta del nuevo catalogo.
+            name: Nombre del nuevo catalogo.
+        Devuelve: Un mesaje informando sobre si el catalogo se ha creado correctamente o si ya existia.
+        '''
+        if os.path.isfile(self.path):
+            print(f'\n❌ The catalogue "{self.name}" already exists.')
+        else:
+            with open(self.path, mode="w") as f:
+                f.write(f'Catalogue of {self.name} films: ')
+            print(f'\nA new catalogue of films "{self.name}" has been successfully created✅') 
+
+
+
 
 #Bienvenida y muestra del menu de opciones
 def show_menu():
@@ -132,7 +149,8 @@ def show_menu():
     '2) Listing films 📃\n'
     '3) Remove a film ➖\n'
     '4) Remove the complete catalogue 💀\n'
-    '5) Exit👋\n'
+    '5) Create a new Catalogue 🆕\n'
+    '6) Exit👋\n'
     )
 
 
@@ -154,53 +172,44 @@ def main():
 
         option = input('\nPlease select an option from the list (only number): ')
 
-        if option == '5':
+        if option == '6':
             print('\nSuccessful programme Exit ✅\n')
             break
 
         else: 
+            genre = input('\nPlease state the Genre: ').capitalize()
+            path = f'Catalogue/{genre}.txt'
+            catalogue = FilmCatalogue(genre, path)
             
             if option == '1':
                 '''
                 Solicita nombre del catalogo sobre el que desea trabajar, establece la ruta del mismo y, si existe, crea un objeto Film con los datos ingresados por el usuario que sera el que utilice el metodo "addFilm" para agregarlo a ese catalogo especifico. Devuelve un mensaje de error si el catalogo ingresado no existe.
                 '''
-                genre = input('\nPlease state the Genre: ').lower()
-                path = f'Catalogue/{genre}.txt'
-
                 if os.path.exists(path):
                     
-                    newFilmName = input('Please indicate the Name of the film: ').lower()
-                    newFilmDirector = input('Please indicate the Director of the film: ').lower()
-                    newFilmYear = input('Please indicate the Year of release: ').lower()
+                    newFilmName = input('Please indicate the Name of the film: ').capitalize()
+                    newFilmDirector = input('Please indicate the Director of the film: ').capitalize()
+                    newFilmYear = input('Please indicate the Year of release: ')
                     film = Film(newFilmName, newFilmDirector, newFilmYear)
 
-                    catalogue = FilmCatalogue(genre, path)
                     catalogue.addFilm(film)
 
                 else: 
                     print('\n❌ The file does not exist. Please try another one')
 
             elif option == '2':
-                genre = input('\nPlease state the Genre: ').lower()
-                path = f'Catalogue/{genre}.txt'
-                catalogue = FilmCatalogue(genre, path)
-            
                 catalogue.listFilms()
 
             elif option == '3':
-                genre = input('\nPlease state the Genre: ').lower()
-                path = f'Catalogue/{genre}.txt'
-                catalogue = FilmCatalogue(genre, path)
-                titleToRemove = input('Please state the Title of the film you want to remove: ').lower()
+                titleToRemove = input('Please state the Title of the film you want to remove: ').capitalize()
 
                 catalogue.removeFilm(titleToRemove)
 
             elif option == '4':
-                genre = input('\nPlease state the Genre: ').lower()
-                path = f'Catalogue/{genre}.txt'
-                
-                catalogue = FilmCatalogue(genre, path)
                 catalogue.removeCatalogue()
+
+            elif option == '5':
+                catalogue.createCatalogue()
 
             else:
                 print('\nERROR ❌ Please check the menu again and introduce a valid option:')
