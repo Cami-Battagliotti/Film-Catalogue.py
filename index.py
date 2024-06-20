@@ -59,8 +59,7 @@ class FilmCatalogue:
         Parámetros:
             name: Es el nombre del catalogo (nombrado segun el genero).
             path: Es la ruta al archivo.
-        Devuelve:
-            Un mesaje informando si el catalogo existe o no.
+        Devuelve: Un mesaje informando si el catalogo existe o no.
         '''
 
         try:
@@ -160,12 +159,13 @@ def main():
             break
 
         else: 
+            
             if option == '1':
                 '''
                 Solicita nombre del catalogo sobre el que desea trabajar, establece la ruta del mismo y, si existe, crea un objeto Film con los datos ingresados por el usuario que sera el que utilice el metodo "addFilm" para agregarlo a ese catalogo especifico. Devuelve un mensaje de error si el catalogo ingresado no existe.
                 '''
                 genre = input('\nPlease state the Genre: ').lower()
-                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                path = f'Catalogue/{genre}.txt'
 
                 if os.path.exists(path):
                     
@@ -182,14 +182,14 @@ def main():
 
             elif option == '2':
                 genre = input('\nPlease state the Genre: ').lower()
-                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                path = f'Catalogue/{genre}.txt'
                 catalogue = FilmCatalogue(genre, path)
             
                 catalogue.listFilms()
 
             elif option == '3':
                 genre = input('\nPlease state the Genre: ').lower()
-                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                path = f'Catalogue/{genre}.txt'
                 catalogue = FilmCatalogue(genre, path)
                 titleToRemove = input('Please state the Title of the film you want to remove: ').lower()
 
@@ -197,7 +197,7 @@ def main():
 
             elif option == '4':
                 genre = input('\nPlease state the Genre: ').lower()
-                path = f'FilmCatalogue/Catalogue/{genre}.txt'
+                path = f'Catalogue/{genre}.txt'
                 
                 catalogue = FilmCatalogue(genre, path)
                 catalogue.removeCatalogue()
